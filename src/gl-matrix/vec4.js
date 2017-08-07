@@ -79,7 +79,7 @@ export function fromValues(x, y, z, w) {
  * @param {vec4} a the source vector
  * @returns {vec4} out
  */
-export function copy(out, a) {
+export function copy(a, out = create()) {
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -97,7 +97,7 @@ export function copy(out, a) {
  * @param {Number} w W component
  * @returns {vec4} out
  */
-export function set(out, x, y, z, w) {
+export function set(x, y, z, w, out = create()) {
   out[0] = x;
   out[1] = y;
   out[2] = z;
@@ -113,7 +113,7 @@ export function set(out, x, y, z, w) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-export function add(out, a, b) {
+export function add(a, b, out = create()) {
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -129,7 +129,7 @@ export function add(out, a, b) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-export function subtract(out, a, b) {
+export function subtract(a, b, out = create()) {
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   out[2] = a[2] - b[2];
@@ -145,7 +145,7 @@ export function subtract(out, a, b) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-export function multiply(out, a, b) {
+export function multiply(a, b, out = create()) {
   out[0] = a[0] * b[0];
   out[1] = a[1] * b[1];
   out[2] = a[2] * b[2];
@@ -161,7 +161,7 @@ export function multiply(out, a, b) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-export function divide(out, a, b) {
+export function divide(a, b, out = create()) {
   out[0] = a[0] / b[0];
   out[1] = a[1] / b[1];
   out[2] = a[2] / b[2];
@@ -176,7 +176,7 @@ export function divide(out, a, b) {
  * @param {vec4} a vector to ceil
  * @returns {vec4} out
  */
-export function ceil(out, a) {
+export function ceil(a, out = create()) {
   out[0] = Math.ceil(a[0]);
   out[1] = Math.ceil(a[1]);
   out[2] = Math.ceil(a[2]);
@@ -191,7 +191,7 @@ export function ceil(out, a) {
  * @param {vec4} a vector to floor
  * @returns {vec4} out
  */
-export function floor(out, a) {
+export function floor(a, out = create()) {
   out[0] = Math.floor(a[0]);
   out[1] = Math.floor(a[1]);
   out[2] = Math.floor(a[2]);
@@ -207,7 +207,7 @@ export function floor(out, a) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-export function min(out, a, b) {
+export function min(a, b, out = create()) {
   out[0] = Math.min(a[0], b[0]);
   out[1] = Math.min(a[1], b[1]);
   out[2] = Math.min(a[2], b[2]);
@@ -223,7 +223,7 @@ export function min(out, a, b) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-export function max(out, a, b) {
+export function max(a, b, out = create()) {
   out[0] = Math.max(a[0], b[0]);
   out[1] = Math.max(a[1], b[1]);
   out[2] = Math.max(a[2], b[2]);
@@ -238,7 +238,7 @@ export function max(out, a, b) {
  * @param {vec4} a vector to round
  * @returns {vec4} out
  */
-export function round(out, a) {
+export function round(a, out = create()) {
   out[0] = Math.round(a[0]);
   out[1] = Math.round(a[1]);
   out[2] = Math.round(a[2]);
@@ -254,7 +254,7 @@ export function round(out, a) {
  * @param {Number} b amount to scale the vector by
  * @returns {vec4} out
  */
-export function scale(out, a, b) {
+export function scale(a, b, out = create()) {
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -271,7 +271,7 @@ export function scale(out, a, b) {
  * @param {Number} scale the amount to scale b by before adding
  * @returns {vec4} out
  */
-export function scaleAndAdd(out, a, b, scale) {
+export function scaleAndAdd(a, b, scale, out = create()) {
   out[0] = a[0] + (b[0] * scale);
   out[1] = a[1] + (b[1] * scale);
   out[2] = a[2] + (b[2] * scale);
@@ -344,7 +344,7 @@ export function squaredLength(a) {
  * @param {vec4} a vector to negate
  * @returns {vec4} out
  */
-export function negate(out, a) {
+export function negate(a, out = create()) {
   out[0] = -a[0];
   out[1] = -a[1];
   out[2] = -a[2];
@@ -359,7 +359,7 @@ export function negate(out, a) {
  * @param {vec4} a vector to invert
  * @returns {vec4} out
  */
-export function inverse(out, a) {
+export function inverse(a, out = create()) {
   out[0] = 1.0 / a[0];
   out[1] = 1.0 / a[1];
   out[2] = 1.0 / a[2];
@@ -374,7 +374,7 @@ export function inverse(out, a) {
  * @param {vec4} a vector to normalize
  * @returns {vec4} out
  */
-export function normalize(out, a) {
+export function normalize(a, out = create()) {
   let x = a[0];
   let y = a[1];
   let z = a[2];
@@ -410,7 +410,7 @@ export function dot(a, b) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {vec4} out
  */
-export function lerp(out, a, b, t) {
+export function lerp(a, b, t, out = create()) {
   let ax = a[0];
   let ay = a[1];
   let az = a[2];
@@ -429,7 +429,7 @@ export function lerp(out, a, b, t) {
  * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned
  * @returns {vec4} out
  */
-export function random(out, vectorScale) {
+export function random(vectorScale, out = create()) {
   vectorScale = vectorScale || 1.0;
 
   //TODO: This is a pretty awful way of doing this. Find something better.
@@ -437,8 +437,8 @@ export function random(out, vectorScale) {
   out[1] = glMatrix.RANDOM();
   out[2] = glMatrix.RANDOM();
   out[3] = glMatrix.RANDOM();
-  normalize(out, out);
-  scale(out, out, vectorScale);
+  normalize(out, out = create());
+  scale(out, vectorScale, out = create());
   return out;
 }
 
@@ -450,7 +450,7 @@ export function random(out, vectorScale) {
  * @param {mat4} m matrix to transform with
  * @returns {vec4} out
  */
-export function transformMat4(out, a, m) {
+export function transformMat4(a, m, out = create()) {
   let x = a[0], y = a[1], z = a[2], w = a[3];
   out[0] = m[0] * x + m[4] * y + m[8] * z + m[12] * w;
   out[1] = m[1] * x + m[5] * y + m[9] * z + m[13] * w;
@@ -467,7 +467,7 @@ export function transformMat4(out, a, m) {
  * @param {quat} q quaternion to transform with
  * @returns {vec4} out
  */
-export function transformQuat(out, a, q) {
+export function transformQuat(a, q, out = create()) {
   let x = a[0], y = a[1], z = a[2];
   let qx = q[0], qy = q[1], qz = q[2], qw = q[3];
 

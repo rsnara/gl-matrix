@@ -71,7 +71,7 @@ export function fromValues(x, y) {
  * @param {vec2} a the source vector
  * @returns {vec2} out
  */
-export function copy(out, a) {
+export function copy(a, out = create()) {
   out[0] = a[0];
   out[1] = a[1];
   return out;
@@ -85,7 +85,7 @@ export function copy(out, a) {
  * @param {Number} y Y component
  * @returns {vec2} out
  */
-export function set(out, x, y) {
+export function set(x, y, out = create()) {
   out[0] = x;
   out[1] = y;
   return out;
@@ -99,7 +99,7 @@ export function set(out, x, y) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-export function add(out, a, b) {
+export function add(a, b, out = create()) {
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   return out;
@@ -113,7 +113,7 @@ export function add(out, a, b) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-export function subtract(out, a, b) {
+export function subtract(a, b, out = create()) {
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   return out;
@@ -127,7 +127,7 @@ export function subtract(out, a, b) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-export function multiply(out, a, b) {
+export function multiply(a, b, out = create()) {
   out[0] = a[0] * b[0];
   out[1] = a[1] * b[1];
   return out;
@@ -141,7 +141,7 @@ export function multiply(out, a, b) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-export function divide(out, a, b) {
+export function divide(a, b, out = create()) {
   out[0] = a[0] / b[0];
   out[1] = a[1] / b[1];
   return out;
@@ -154,7 +154,7 @@ export function divide(out, a, b) {
  * @param {vec2} a vector to ceil
  * @returns {vec2} out
  */
-export function ceil(out, a) {
+export function ceil(a, out = create()) {
   out[0] = Math.ceil(a[0]);
   out[1] = Math.ceil(a[1]);
   return out;
@@ -167,7 +167,7 @@ export function ceil(out, a) {
  * @param {vec2} a vector to floor
  * @returns {vec2} out
  */
-export function floor(out, a) {
+export function floor(a, out = create()) {
   out[0] = Math.floor(a[0]);
   out[1] = Math.floor(a[1]);
   return out;
@@ -181,7 +181,7 @@ export function floor(out, a) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-export function min(out, a, b) {
+export function min(a, b, out = create()) {
   out[0] = Math.min(a[0], b[0]);
   out[1] = Math.min(a[1], b[1]);
   return out;
@@ -195,7 +195,7 @@ export function min(out, a, b) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-export function max(out, a, b) {
+export function max(a, b, out = create()) {
   out[0] = Math.max(a[0], b[0]);
   out[1] = Math.max(a[1], b[1]);
   return out;
@@ -208,7 +208,7 @@ export function max(out, a, b) {
  * @param {vec2} a vector to round
  * @returns {vec2} out
  */
-export function round (out, a) {
+export function round (a, out = create()) {
   out[0] = Math.round(a[0]);
   out[1] = Math.round(a[1]);
   return out;
@@ -222,7 +222,7 @@ export function round (out, a) {
  * @param {Number} b amount to scale the vector by
  * @returns {vec2} out
  */
-export function scale(out, a, b) {
+export function scale(a, b, out = create()) {
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   return out;
@@ -237,7 +237,7 @@ export function scale(out, a, b) {
  * @param {Number} scale the amount to scale b by before adding
  * @returns {vec2} out
  */
-export function scaleAndAdd(out, a, b, scale) {
+export function scaleAndAdd(a, b, scale, out = create()) {
   out[0] = a[0] + (b[0] * scale);
   out[1] = a[1] + (b[1] * scale);
   return out;
@@ -300,7 +300,7 @@ export function squaredLength (a) {
  * @param {vec2} a vector to negate
  * @returns {vec2} out
  */
-export function negate(out, a) {
+export function negate(a, out = create()) {
   out[0] = -a[0];
   out[1] = -a[1];
   return out;
@@ -313,7 +313,7 @@ export function negate(out, a) {
  * @param {vec2} a vector to invert
  * @returns {vec2} out
  */
-export function inverse(out, a) {
+export function inverse(a, out = create()) {
   out[0] = 1.0 / a[0];
   out[1] = 1.0 / a[1];
   return out;
@@ -326,7 +326,7 @@ export function inverse(out, a) {
  * @param {vec2} a vector to normalize
  * @returns {vec2} out
  */
-export function normalize(out, a) {
+export function normalize(a, out = create()) {
   var x = a[0],
     y = a[1];
   var len = x*x + y*y;
@@ -359,7 +359,7 @@ export function dot(a, b) {
  * @param {vec2} b the second operand
  * @returns {vec3} out
  */
-export function cross(out, a, b) {
+export function cross(a, b, out = create()) {
   var z = a[0] * b[1] - a[1] * b[0];
   out[0] = out[1] = 0;
   out[2] = z;
@@ -375,7 +375,7 @@ export function cross(out, a, b) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {vec2} out
  */
-export function lerp(out, a, b, t) {
+export function lerp(a, b, t, out = create()) {
   var ax = a[0],
     ay = a[1];
   out[0] = ax + t * (b[0] - ax);
@@ -390,7 +390,7 @@ export function lerp(out, a, b, t) {
  * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned
  * @returns {vec2} out
  */
-export function random(out, scale) {
+export function random(scale, out = create()) {
   scale = scale || 1.0;
   var r = glMatrix.RANDOM() * 2.0 * Math.PI;
   out[0] = Math.cos(r) * scale;
@@ -406,7 +406,7 @@ export function random(out, scale) {
  * @param {mat2} m matrix to transform with
  * @returns {vec2} out
  */
-export function transformMat2(out, a, m) {
+export function transformMat2(a, m, out = create()) {
   var x = a[0],
     y = a[1];
   out[0] = m[0] * x + m[2] * y;
@@ -422,7 +422,7 @@ export function transformMat2(out, a, m) {
  * @param {mat2d} m matrix to transform with
  * @returns {vec2} out
  */
-export function transformMat2d(out, a, m) {
+export function transformMat2d(a, m, out = create()) {
   var x = a[0],
     y = a[1];
   out[0] = m[0] * x + m[2] * y + m[4];
@@ -439,7 +439,7 @@ export function transformMat2d(out, a, m) {
  * @param {mat3} m matrix to transform with
  * @returns {vec2} out
  */
-export function transformMat3(out, a, m) {
+export function transformMat3(a, m, out = create()) {
   var x = a[0],
     y = a[1];
   out[0] = m[0] * x + m[3] * y + m[6];
@@ -457,7 +457,7 @@ export function transformMat3(out, a, m) {
  * @param {mat4} m matrix to transform with
  * @returns {vec2} out
  */
-export function transformMat4(out, a, m) {
+export function transformMat4(a, m, out = create()) {
   let x = a[0];
   let y = a[1];
   out[0] = m[0] * x + m[4] * y + m[12];

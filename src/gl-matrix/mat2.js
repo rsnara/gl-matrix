@@ -61,7 +61,7 @@ export function clone(a) {
  * @param {mat2} a the source matrix
  * @returns {mat2} out
  */
-export function copy(out, a) {
+export function copy(a, out = create()) {
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -111,7 +111,7 @@ export function fromValues(m00, m01, m10, m11) {
  * @param {Number} m11 Component in column 1, row 1 position (index 3)
  * @returns {mat2} out
  */
-export function set(out, m00, m01, m10, m11) {
+export function set(m00, m01, m10, m11, out = create()) {
   out[0] = m00;
   out[1] = m01;
   out[2] = m10;
@@ -126,7 +126,7 @@ export function set(out, m00, m01, m10, m11) {
  * @param {mat2} a the source matrix
  * @returns {mat2} out
  */
-export function transpose(out, a) {
+export function transpose(a, out = create()) {
   // If we are transposing ourselves we can skip a few steps but have to cache
   // some values
   if (out === a) {
@@ -150,7 +150,7 @@ export function transpose(out, a) {
  * @param {mat2} a the source matrix
  * @returns {mat2} out
  */
-export function invert(out, a) {
+export function invert(a, out = create()) {
   let a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
 
   // Calculate the determinant
@@ -176,7 +176,7 @@ export function invert(out, a) {
  * @param {mat2} a the source matrix
  * @returns {mat2} out
  */
-export function adjoint(out, a) {
+export function adjoint(a, out = create()) {
   // Caching this value is nessecary if out == a
   let a0 = a[0];
   out[0] =  a[3];
@@ -205,7 +205,7 @@ export function determinant(a) {
  * @param {mat2} b the second operand
  * @returns {mat2} out
  */
-export function multiply(out, a, b) {
+export function multiply(a, b, out = create()) {
   let a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
   let b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
   out[0] = a0 * b0 + a2 * b1;
@@ -223,7 +223,7 @@ export function multiply(out, a, b) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat2} out
  */
-export function rotate(out, a, rad) {
+export function rotate(a, rad, out = create()) {
   let a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
   let s = Math.sin(rad);
   let c = Math.cos(rad);
@@ -242,7 +242,7 @@ export function rotate(out, a, rad) {
  * @param {vec2} v the vec2 to scale the matrix by
  * @returns {mat2} out
  **/
-export function scale(out, a, v) {
+export function scale(a, v, out = create()) {
   let a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
   let v0 = v[0], v1 = v[1];
   out[0] = a0 * v0;
@@ -263,7 +263,7 @@ export function scale(out, a, v) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat2} out
  */
-export function fromRotation(out, rad) {
+export function fromRotation(rad, out = create()) {
   let s = Math.sin(rad);
   let c = Math.cos(rad);
   out[0] = c;
@@ -284,7 +284,7 @@ export function fromRotation(out, rad) {
  * @param {vec2} v Scaling vector
  * @returns {mat2} out
  */
-export function fromScaling(out, v) {
+export function fromScaling(v, out = create()) {
   out[0] = v[0];
   out[1] = 0;
   out[2] = 0;
@@ -336,7 +336,7 @@ export function LDU(L, D, U, a) {
  * @param {mat2} b the second operand
  * @returns {mat2} out
  */
-export function add(out, a, b) {
+export function add(a, b, out = create()) {
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -352,7 +352,7 @@ export function add(out, a, b) {
  * @param {mat2} b the second operand
  * @returns {mat2} out
  */
-export function subtract(out, a, b) {
+export function subtract(a, b, out = create()) {
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   out[2] = a[2] - b[2];
@@ -395,7 +395,7 @@ export function equals(a, b) {
  * @param {Number} b amount to scale the matrix's elements by
  * @returns {mat2} out
  */
-export function multiplyScalar(out, a, b) {
+export function multiplyScalar(a, b, out = create()) {
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -412,7 +412,7 @@ export function multiplyScalar(out, a, b) {
  * @param {Number} scale the amount to scale b's elements by before adding
  * @returns {mat2} out
  */
-export function multiplyScalarAndAdd(out, a, b, scale) {
+export function multiplyScalarAndAdd(a, b, scale, out = create()) {
   out[0] = a[0] + (b[0] * scale);
   out[1] = a[1] + (b[1] * scale);
   out[2] = a[2] + (b[2] * scale);

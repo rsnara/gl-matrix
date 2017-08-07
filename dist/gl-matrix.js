@@ -275,7 +275,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE. */
 
-function fromMat4(out, a) {
+function fromMat4(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -315,7 +317,9 @@ function clone(a) {
  * @param {mat3} a the source matrix
  * @returns {mat3} out
  */
-function copy(out, a) {
+function copy(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -371,7 +375,9 @@ function fromValues(m00, m01, m02, m10, m11, m12, m20, m21, m22) {
  * @param {Number} m22 Component in column 2, row 2 position (index 8)
  * @returns {mat3} out
  */
-function set(out, m00, m01, m02, m10, m11, m12, m20, m21, m22) {
+function set(m00, m01, m02, m10, m11, m12, m20, m21, m22) {
+  var out = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : create();
+
   out[0] = m00;
   out[1] = m01;
   out[2] = m02;
@@ -410,7 +416,9 @@ function identity(out) {
  * @param {mat3} a the source matrix
  * @returns {mat3} out
  */
-function transpose(out, a) {
+function transpose(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   // If we are transposing ourselves we can skip a few steps but have to cache some values
   if (out === a) {
     var a01 = a[1],
@@ -444,7 +452,9 @@ function transpose(out, a) {
  * @param {mat3} a the source matrix
  * @returns {mat3} out
  */
-function invert(out, a) {
+function invert(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2];
@@ -486,7 +496,9 @@ function invert(out, a) {
  * @param {mat3} a the source matrix
  * @returns {mat3} out
  */
-function adjoint(out, a) {
+function adjoint(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2];
@@ -537,7 +549,9 @@ function determinant(a) {
  * @param {mat3} b the second operand
  * @returns {mat3} out
  */
-function multiply(out, a, b) {
+function multiply(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2];
@@ -580,7 +594,9 @@ function multiply(out, a, b) {
  * @param {vec2} v vector to translate by
  * @returns {mat3} out
  */
-function translate(out, a, v) {
+function translate(a, v) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -615,7 +631,9 @@ function translate(out, a, v) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat3} out
  */
-function rotate(out, a, rad) {
+function rotate(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -650,7 +668,9 @@ function rotate(out, a, rad) {
  * @param {vec2} v the vec2 to scale the matrix by
  * @returns {mat3} out
  **/
-function scale(out, a, v) {
+function scale(a, v) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = v[0],
       y = v[1];
 
@@ -679,7 +699,9 @@ function scale(out, a, v) {
  * @param {vec2} v Translation vector
  * @returns {mat3} out
  */
-function fromTranslation(out, v) {
+function fromTranslation(v) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = 1;
   out[1] = 0;
   out[2] = 0;
@@ -703,7 +725,9 @@ function fromTranslation(out, v) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat3} out
  */
-function fromRotation(out, rad) {
+function fromRotation(rad) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var s = Math.sin(rad),
       c = Math.cos(rad);
 
@@ -732,7 +756,9 @@ function fromRotation(out, rad) {
  * @param {vec2} v Scaling vector
  * @returns {mat3} out
  */
-function fromScaling(out, v) {
+function fromScaling(v) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = v[0];
   out[1] = 0;
   out[2] = 0;
@@ -754,7 +780,9 @@ function fromScaling(out, v) {
  * @param {mat2d} a the matrix to copy
  * @returns {mat3} out
  **/
-function fromMat2d(out, a) {
+function fromMat2d(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   out[2] = 0;
@@ -777,7 +805,9 @@ function fromMat2d(out, a) {
 *
 * @returns {mat3} out
 */
-function fromQuat(out, q) {
+function fromQuat(q) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var x = q[0],
       y = q[1],
       z = q[2],
@@ -819,7 +849,9 @@ function fromQuat(out, q) {
 *
 * @returns {mat3} out
 */
-function normalFromMat4(out, a) {
+function normalFromMat4(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -881,7 +913,9 @@ function normalFromMat4(out, a) {
  * @param {number} height Height of gl context
  * @returns {mat3} out
  */
-function projection(out, width, height) {
+function projection(width, height) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = 2 / width;
   out[1] = 0;
   out[2] = 0;
@@ -922,7 +956,9 @@ function frob(a) {
  * @param {mat3} b the second operand
  * @returns {mat3} out
  */
-function add(out, a, b) {
+function add(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -943,7 +979,9 @@ function add(out, a, b) {
  * @param {mat3} b the second operand
  * @returns {mat3} out
  */
-function subtract(out, a, b) {
+function subtract(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   out[2] = a[2] - b[2];
@@ -964,7 +1002,9 @@ function subtract(out, a, b) {
  * @param {Number} b amount to scale the matrix's elements by
  * @returns {mat3} out
  */
-function multiplyScalar(out, a, b) {
+function multiplyScalar(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -986,7 +1026,9 @@ function multiplyScalar(out, a, b) {
  * @param {Number} scale the amount to scale b's elements by before adding
  * @returns {mat3} out
  */
-function multiplyScalarAndAdd(out, a, b, scale) {
+function multiplyScalarAndAdd(a, b, scale) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   out[0] = a[0] + b[0] * scale;
   out[1] = a[1] + b[1] * scale;
   out[2] = a[2] + b[2] * scale;
@@ -1196,7 +1238,9 @@ function fromValues(x, y, z) {
  * @param {vec3} a the source vector
  * @returns {vec3} out
  */
-function copy(out, a) {
+function copy(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -1212,7 +1256,9 @@ function copy(out, a) {
  * @param {Number} z Z component
  * @returns {vec3} out
  */
-function set(out, x, y, z) {
+function set(x, y, z) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   out[0] = x;
   out[1] = y;
   out[2] = z;
@@ -1227,7 +1273,9 @@ function set(out, x, y, z) {
  * @param {vec3} b the second operand
  * @returns {vec3} out
  */
-function add(out, a, b) {
+function add(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -1242,7 +1290,9 @@ function add(out, a, b) {
  * @param {vec3} b the second operand
  * @returns {vec3} out
  */
-function subtract(out, a, b) {
+function subtract(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   out[2] = a[2] - b[2];
@@ -1257,7 +1307,9 @@ function subtract(out, a, b) {
  * @param {vec3} b the second operand
  * @returns {vec3} out
  */
-function multiply(out, a, b) {
+function multiply(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b[0];
   out[1] = a[1] * b[1];
   out[2] = a[2] * b[2];
@@ -1272,7 +1324,9 @@ function multiply(out, a, b) {
  * @param {vec3} b the second operand
  * @returns {vec3} out
  */
-function divide(out, a, b) {
+function divide(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] / b[0];
   out[1] = a[1] / b[1];
   out[2] = a[2] / b[2];
@@ -1286,7 +1340,9 @@ function divide(out, a, b) {
  * @param {vec3} a vector to ceil
  * @returns {vec3} out
  */
-function ceil(out, a) {
+function ceil(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.ceil(a[0]);
   out[1] = Math.ceil(a[1]);
   out[2] = Math.ceil(a[2]);
@@ -1300,7 +1356,9 @@ function ceil(out, a) {
  * @param {vec3} a vector to floor
  * @returns {vec3} out
  */
-function floor(out, a) {
+function floor(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.floor(a[0]);
   out[1] = Math.floor(a[1]);
   out[2] = Math.floor(a[2]);
@@ -1315,7 +1373,9 @@ function floor(out, a) {
  * @param {vec3} b the second operand
  * @returns {vec3} out
  */
-function min(out, a, b) {
+function min(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = Math.min(a[0], b[0]);
   out[1] = Math.min(a[1], b[1]);
   out[2] = Math.min(a[2], b[2]);
@@ -1330,7 +1390,9 @@ function min(out, a, b) {
  * @param {vec3} b the second operand
  * @returns {vec3} out
  */
-function max(out, a, b) {
+function max(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = Math.max(a[0], b[0]);
   out[1] = Math.max(a[1], b[1]);
   out[2] = Math.max(a[2], b[2]);
@@ -1344,7 +1406,9 @@ function max(out, a, b) {
  * @param {vec3} a vector to round
  * @returns {vec3} out
  */
-function round(out, a) {
+function round(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.round(a[0]);
   out[1] = Math.round(a[1]);
   out[2] = Math.round(a[2]);
@@ -1359,7 +1423,9 @@ function round(out, a) {
  * @param {Number} b amount to scale the vector by
  * @returns {vec3} out
  */
-function scale(out, a, b) {
+function scale(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -1375,7 +1441,9 @@ function scale(out, a, b) {
  * @param {Number} scale the amount to scale b by before adding
  * @returns {vec3} out
  */
-function scaleAndAdd(out, a, b, scale) {
+function scaleAndAdd(a, b, scale) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   out[0] = a[0] + b[0] * scale;
   out[1] = a[1] + b[1] * scale;
   out[2] = a[2] + b[2] * scale;
@@ -1430,7 +1498,9 @@ function squaredLength(a) {
  * @param {vec3} a vector to negate
  * @returns {vec3} out
  */
-function negate(out, a) {
+function negate(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = -a[0];
   out[1] = -a[1];
   out[2] = -a[2];
@@ -1444,7 +1514,9 @@ function negate(out, a) {
  * @param {vec3} a vector to invert
  * @returns {vec3} out
  */
-function inverse(out, a) {
+function inverse(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = 1.0 / a[0];
   out[1] = 1.0 / a[1];
   out[2] = 1.0 / a[2];
@@ -1458,7 +1530,9 @@ function inverse(out, a) {
  * @param {vec3} a vector to normalize
  * @returns {vec3} out
  */
-function normalize(out, a) {
+function normalize(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var x = a[0];
   var y = a[1];
   var z = a[2];
@@ -1492,7 +1566,9 @@ function dot(a, b) {
  * @param {vec3} b the second operand
  * @returns {vec3} out
  */
-function cross(out, a, b) {
+function cross(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var ax = a[0],
       ay = a[1],
       az = a[2];
@@ -1515,7 +1591,9 @@ function cross(out, a, b) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {vec3} out
  */
-function lerp(out, a, b, t) {
+function lerp(a, b, t) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var ax = a[0];
   var ay = a[1];
   var az = a[2];
@@ -1536,7 +1614,9 @@ function lerp(out, a, b, t) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {vec3} out
  */
-function hermite(out, a, b, c, d, t) {
+function hermite(a, b, c, d, t) {
+  var out = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : create();
+
   var factorTimes2 = t * t;
   var factor1 = factorTimes2 * (2 * t - 3) + 1;
   var factor2 = factorTimes2 * (t - 2) + t;
@@ -1561,7 +1641,9 @@ function hermite(out, a, b, c, d, t) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {vec3} out
  */
-function bezier(out, a, b, c, d, t) {
+function bezier(a, b, c, d, t) {
+  var out = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : create();
+
   var inverseFactor = 1 - t;
   var inverseFactorTimesTwo = inverseFactor * inverseFactor;
   var factorTimes2 = t * t;
@@ -1584,7 +1666,9 @@ function bezier(out, a, b, c, d, t) {
  * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned
  * @returns {vec3} out
  */
-function random(out, scale) {
+function random(scale) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   scale = scale || 1.0;
 
   var r = glMatrix.RANDOM() * 2.0 * Math.PI;
@@ -1606,7 +1690,9 @@ function random(out, scale) {
  * @param {mat4} m matrix to transform with
  * @returns {vec3} out
  */
-function transformMat4(out, a, m) {
+function transformMat4(a, m) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = a[0],
       y = a[1],
       z = a[2];
@@ -1626,7 +1712,9 @@ function transformMat4(out, a, m) {
  * @param {mat3} m the 3x3 matrix to transform with
  * @returns {vec3} out
  */
-function transformMat3(out, a, m) {
+function transformMat3(a, m) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = a[0],
       y = a[1],
       z = a[2];
@@ -1644,7 +1732,9 @@ function transformMat3(out, a, m) {
  * @param {quat} q quaternion to transform with
  * @returns {vec3} out
  */
-function transformQuat(out, a, q) {
+function transformQuat(a, q) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   // benchmarks: http://jsperf.com/quaternion-transform-vec3-implementations
 
   var x = a[0],
@@ -1676,7 +1766,9 @@ function transformQuat(out, a, q) {
  * @param {Number} c The angle of rotation
  * @returns {vec3} out
  */
-function rotateX(out, a, b, c) {
+function rotateX(a, b, c) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var p = [],
       r = [];
   //Translate point to the origin
@@ -1705,7 +1797,9 @@ function rotateX(out, a, b, c) {
  * @param {Number} c The angle of rotation
  * @returns {vec3} out
  */
-function rotateY(out, a, b, c) {
+function rotateY(a, b, c) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var p = [],
       r = [];
   //Translate point to the origin
@@ -1734,7 +1828,9 @@ function rotateY(out, a, b, c) {
  * @param {Number} c The angle of rotation
  * @returns {vec3} out
  */
-function rotateZ(out, a, b, c) {
+function rotateZ(a, b, c) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var p = [],
       r = [];
   //Translate point to the origin
@@ -2029,7 +2125,9 @@ function fromValues(x, y, z, w) {
  * @param {vec4} a the source vector
  * @returns {vec4} out
  */
-function copy(out, a) {
+function copy(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -2047,7 +2145,9 @@ function copy(out, a) {
  * @param {Number} w W component
  * @returns {vec4} out
  */
-function set(out, x, y, z, w) {
+function set(x, y, z, w) {
+  var out = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : create();
+
   out[0] = x;
   out[1] = y;
   out[2] = z;
@@ -2063,7 +2163,9 @@ function set(out, x, y, z, w) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-function add(out, a, b) {
+function add(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -2079,7 +2181,9 @@ function add(out, a, b) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-function subtract(out, a, b) {
+function subtract(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   out[2] = a[2] - b[2];
@@ -2095,7 +2199,9 @@ function subtract(out, a, b) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-function multiply(out, a, b) {
+function multiply(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b[0];
   out[1] = a[1] * b[1];
   out[2] = a[2] * b[2];
@@ -2111,7 +2217,9 @@ function multiply(out, a, b) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-function divide(out, a, b) {
+function divide(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] / b[0];
   out[1] = a[1] / b[1];
   out[2] = a[2] / b[2];
@@ -2126,7 +2234,9 @@ function divide(out, a, b) {
  * @param {vec4} a vector to ceil
  * @returns {vec4} out
  */
-function ceil(out, a) {
+function ceil(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.ceil(a[0]);
   out[1] = Math.ceil(a[1]);
   out[2] = Math.ceil(a[2]);
@@ -2141,7 +2251,9 @@ function ceil(out, a) {
  * @param {vec4} a vector to floor
  * @returns {vec4} out
  */
-function floor(out, a) {
+function floor(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.floor(a[0]);
   out[1] = Math.floor(a[1]);
   out[2] = Math.floor(a[2]);
@@ -2157,7 +2269,9 @@ function floor(out, a) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-function min(out, a, b) {
+function min(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = Math.min(a[0], b[0]);
   out[1] = Math.min(a[1], b[1]);
   out[2] = Math.min(a[2], b[2]);
@@ -2173,7 +2287,9 @@ function min(out, a, b) {
  * @param {vec4} b the second operand
  * @returns {vec4} out
  */
-function max(out, a, b) {
+function max(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = Math.max(a[0], b[0]);
   out[1] = Math.max(a[1], b[1]);
   out[2] = Math.max(a[2], b[2]);
@@ -2188,7 +2304,9 @@ function max(out, a, b) {
  * @param {vec4} a vector to round
  * @returns {vec4} out
  */
-function round(out, a) {
+function round(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.round(a[0]);
   out[1] = Math.round(a[1]);
   out[2] = Math.round(a[2]);
@@ -2204,7 +2322,9 @@ function round(out, a) {
  * @param {Number} b amount to scale the vector by
  * @returns {vec4} out
  */
-function scale(out, a, b) {
+function scale(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -2221,7 +2341,9 @@ function scale(out, a, b) {
  * @param {Number} scale the amount to scale b by before adding
  * @returns {vec4} out
  */
-function scaleAndAdd(out, a, b, scale) {
+function scaleAndAdd(a, b, scale) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   out[0] = a[0] + b[0] * scale;
   out[1] = a[1] + b[1] * scale;
   out[2] = a[2] + b[2] * scale;
@@ -2294,7 +2416,9 @@ function squaredLength(a) {
  * @param {vec4} a vector to negate
  * @returns {vec4} out
  */
-function negate(out, a) {
+function negate(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = -a[0];
   out[1] = -a[1];
   out[2] = -a[2];
@@ -2309,7 +2433,9 @@ function negate(out, a) {
  * @param {vec4} a vector to invert
  * @returns {vec4} out
  */
-function inverse(out, a) {
+function inverse(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = 1.0 / a[0];
   out[1] = 1.0 / a[1];
   out[2] = 1.0 / a[2];
@@ -2324,7 +2450,9 @@ function inverse(out, a) {
  * @param {vec4} a vector to normalize
  * @returns {vec4} out
  */
-function normalize(out, a) {
+function normalize(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var x = a[0];
   var y = a[1];
   var z = a[2];
@@ -2360,7 +2488,9 @@ function dot(a, b) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {vec4} out
  */
-function lerp(out, a, b, t) {
+function lerp(a, b, t) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var ax = a[0];
   var ay = a[1];
   var az = a[2];
@@ -2379,7 +2509,9 @@ function lerp(out, a, b, t) {
  * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned
  * @returns {vec4} out
  */
-function random(out, vectorScale) {
+function random(vectorScale) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   vectorScale = vectorScale || 1.0;
 
   //TODO: This is a pretty awful way of doing this. Find something better.
@@ -2387,8 +2519,8 @@ function random(out, vectorScale) {
   out[1] = glMatrix.RANDOM();
   out[2] = glMatrix.RANDOM();
   out[3] = glMatrix.RANDOM();
-  normalize(out, out);
-  scale(out, out, vectorScale);
+  normalize(out, out = create());
+  scale(out, vectorScale, out = create());
   return out;
 }
 
@@ -2400,7 +2532,9 @@ function random(out, vectorScale) {
  * @param {mat4} m matrix to transform with
  * @returns {vec4} out
  */
-function transformMat4(out, a, m) {
+function transformMat4(a, m) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = a[0],
       y = a[1],
       z = a[2],
@@ -2420,7 +2554,9 @@ function transformMat4(out, a, m) {
  * @param {quat} q quaternion to transform with
  * @returns {vec4} out
  */
-function transformQuat(out, a, q) {
+function transformQuat(a, q) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = a[0],
       y = a[1],
       z = a[2];
@@ -2756,7 +2892,9 @@ function clone(a) {
  * @param {mat2} a the source matrix
  * @returns {mat2} out
  */
-function copy(out, a) {
+function copy(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -2806,7 +2944,9 @@ function fromValues(m00, m01, m10, m11) {
  * @param {Number} m11 Component in column 1, row 1 position (index 3)
  * @returns {mat2} out
  */
-function set(out, m00, m01, m10, m11) {
+function set(m00, m01, m10, m11) {
+  var out = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : create();
+
   out[0] = m00;
   out[1] = m01;
   out[2] = m10;
@@ -2821,7 +2961,9 @@ function set(out, m00, m01, m10, m11) {
  * @param {mat2} a the source matrix
  * @returns {mat2} out
  */
-function transpose(out, a) {
+function transpose(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   // If we are transposing ourselves we can skip a few steps but have to cache
   // some values
   if (out === a) {
@@ -2845,7 +2987,9 @@ function transpose(out, a) {
  * @param {mat2} a the source matrix
  * @returns {mat2} out
  */
-function invert(out, a) {
+function invert(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -2874,7 +3018,9 @@ function invert(out, a) {
  * @param {mat2} a the source matrix
  * @returns {mat2} out
  */
-function adjoint(out, a) {
+function adjoint(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   // Caching this value is nessecary if out == a
   var a0 = a[0];
   out[0] = a[3];
@@ -2903,7 +3049,9 @@ function determinant(a) {
  * @param {mat2} b the second operand
  * @returns {mat2} out
  */
-function multiply(out, a, b) {
+function multiply(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -2927,7 +3075,9 @@ function multiply(out, a, b) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat2} out
  */
-function rotate(out, a, rad) {
+function rotate(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -2949,7 +3099,9 @@ function rotate(out, a, rad) {
  * @param {vec2} v the vec2 to scale the matrix by
  * @returns {mat2} out
  **/
-function scale(out, a, v) {
+function scale(a, v) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -2974,7 +3126,9 @@ function scale(out, a, v) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat2} out
  */
-function fromRotation(out, rad) {
+function fromRotation(rad) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   out[0] = c;
@@ -2995,7 +3149,9 @@ function fromRotation(out, rad) {
  * @param {vec2} v Scaling vector
  * @returns {mat2} out
  */
-function fromScaling(out, v) {
+function fromScaling(v) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = v[0];
   out[1] = 0;
   out[2] = 0;
@@ -3047,7 +3203,9 @@ function LDU(L, D, U, a) {
  * @param {mat2} b the second operand
  * @returns {mat2} out
  */
-function add(out, a, b) {
+function add(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -3063,7 +3221,9 @@ function add(out, a, b) {
  * @param {mat2} b the second operand
  * @returns {mat2} out
  */
-function subtract(out, a, b) {
+function subtract(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   out[2] = a[2] - b[2];
@@ -3109,7 +3269,9 @@ function equals(a, b) {
  * @param {Number} b amount to scale the matrix's elements by
  * @returns {mat2} out
  */
-function multiplyScalar(out, a, b) {
+function multiplyScalar(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -3126,7 +3288,9 @@ function multiplyScalar(out, a, b) {
  * @param {Number} scale the amount to scale b's elements by before adding
  * @returns {mat2} out
  */
-function multiplyScalarAndAdd(out, a, b, scale) {
+function multiplyScalarAndAdd(a, b, scale) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   out[0] = a[0] + b[0] * scale;
   out[1] = a[1] + b[1] * scale;
   out[2] = a[2] + b[2] * scale;
@@ -3266,7 +3430,9 @@ function clone(a) {
  * @param {mat2d} a the source matrix
  * @returns {mat2d} out
  */
-function copy(out, a) {
+function copy(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -3326,7 +3492,9 @@ function fromValues(a, b, c, d, tx, ty) {
  * @param {Number} ty Component TY (index 5)
  * @returns {mat2d} out
  */
-function set(out, a, b, c, d, tx, ty) {
+function set(a, b, c, d, tx, ty) {
+  var out = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : create();
+
   out[0] = a;
   out[1] = b;
   out[2] = c;
@@ -3343,7 +3511,9 @@ function set(out, a, b, c, d, tx, ty) {
  * @param {mat2d} a the source matrix
  * @returns {mat2d} out
  */
-function invert(out, a) {
+function invert(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var aa = a[0],
       ab = a[1],
       ac = a[2],
@@ -3384,7 +3554,9 @@ function determinant(a) {
  * @param {mat2d} b the second operand
  * @returns {mat2d} out
  */
-function multiply(out, a, b) {
+function multiply(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -3414,7 +3586,9 @@ function multiply(out, a, b) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat2d} out
  */
-function rotate(out, a, rad) {
+function rotate(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -3440,7 +3614,9 @@ function rotate(out, a, rad) {
  * @param {vec2} v the vec2 to scale the matrix by
  * @returns {mat2d} out
  **/
-function scale(out, a, v) {
+function scale(a, v) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -3466,7 +3642,9 @@ function scale(out, a, v) {
  * @param {vec2} v the vec2 to translate the matrix by
  * @returns {mat2d} out
  **/
-function translate(out, a, v) {
+function translate(a, v) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -3495,7 +3673,9 @@ function translate(out, a, v) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat2d} out
  */
-function fromRotation(out, rad) {
+function fromRotation(rad) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var s = Math.sin(rad),
       c = Math.cos(rad);
   out[0] = c;
@@ -3518,7 +3698,9 @@ function fromRotation(out, rad) {
  * @param {vec2} v Scaling vector
  * @returns {mat2d} out
  */
-function fromScaling(out, v) {
+function fromScaling(v) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = v[0];
   out[1] = 0;
   out[2] = 0;
@@ -3539,7 +3721,9 @@ function fromScaling(out, v) {
  * @param {vec2} v Translation vector
  * @returns {mat2d} out
  */
-function fromTranslation(out, v) {
+function fromTranslation(v) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = 1;
   out[1] = 0;
   out[2] = 0;
@@ -3577,7 +3761,9 @@ function frob(a) {
  * @param {mat2d} b the second operand
  * @returns {mat2d} out
  */
-function add(out, a, b) {
+function add(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -3595,7 +3781,9 @@ function add(out, a, b) {
  * @param {mat2d} b the second operand
  * @returns {mat2d} out
  */
-function subtract(out, a, b) {
+function subtract(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   out[2] = a[2] - b[2];
@@ -3613,7 +3801,9 @@ function subtract(out, a, b) {
  * @param {Number} b amount to scale the matrix's elements by
  * @returns {mat2d} out
  */
-function multiplyScalar(out, a, b) {
+function multiplyScalar(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -3632,7 +3822,9 @@ function multiplyScalar(out, a, b) {
  * @param {Number} scale the amount to scale b's elements by before adding
  * @returns {mat2d} out
  */
-function multiplyScalarAndAdd(out, a, b, scale) {
+function multiplyScalarAndAdd(a, b, scale) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   out[0] = a[0] + b[0] * scale;
   out[1] = a[1] + b[1] * scale;
   out[2] = a[2] + b[2] * scale;
@@ -3835,7 +4027,9 @@ function clone(a) {
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-function copy(out, a) {
+function copy(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   out[2] = a[2];
@@ -3919,7 +4113,9 @@ function fromValues(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, 
  * @param {Number} m33 Component in column 3, row 3 position (index 15)
  * @returns {mat4} out
  */
-function set(out, m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
+function set(m00, m01, m02, m03, m10, m11, m12, m13, m20, m21, m22, m23, m30, m31, m32, m33) {
+  var out = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : create();
+
   out[0] = m00;
   out[1] = m01;
   out[2] = m02;
@@ -3972,7 +4168,9 @@ function identity(out) {
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-function transpose(out, a) {
+function transpose(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   // If we are transposing ourselves we can skip a few steps but have to cache some values
   if (out === a) {
     var a01 = a[1],
@@ -4023,7 +4221,9 @@ function transpose(out, a) {
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-function invert(out, a) {
+function invert(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -4089,7 +4289,9 @@ function invert(out, a) {
  * @param {mat4} a the source matrix
  * @returns {mat4} out
  */
-function adjoint(out, a) {
+function adjoint(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -4175,7 +4377,9 @@ function determinant(a) {
  * @param {mat4} b the second operand
  * @returns {mat4} out
  */
-function multiply(out, a, b) {
+function multiply(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var a00 = a[0],
       a01 = a[1],
       a02 = a[2],
@@ -4231,7 +4435,9 @@ function multiply(out, a, b) {
  * @param {vec3} v vector to translate by
  * @returns {mat4} out
  */
-function translate(out, a, v) {
+function translate(a, v) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = v[0],
       y = v[1],
       z = v[2];
@@ -4279,7 +4485,9 @@ function translate(out, a, v) {
  * @param {vec3} v the vec3 to scale the matrix by
  * @returns {mat4} out
  **/
-function scale(out, a, v) {
+function scale(a, v) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = v[0],
       y = v[1],
       z = v[2];
@@ -4312,7 +4520,9 @@ function scale(out, a, v) {
  * @param {vec3} axis the axis to rotate around
  * @returns {mat4} out
  */
-function rotate(out, a, rad, axis) {
+function rotate(a, rad, axis) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var x = axis[0],
       y = axis[1],
       z = axis[2];
@@ -4396,7 +4606,9 @@ function rotate(out, a, rad, axis) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function rotateX(out, a, rad) {
+function rotateX(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a10 = a[4];
@@ -4440,7 +4652,9 @@ function rotateX(out, a, rad) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function rotateY(out, a, rad) {
+function rotateY(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a00 = a[0];
@@ -4484,7 +4698,9 @@ function rotateY(out, a, rad) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function rotateZ(out, a, rad) {
+function rotateZ(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var s = Math.sin(rad);
   var c = Math.cos(rad);
   var a00 = a[0];
@@ -4531,7 +4747,9 @@ function rotateZ(out, a, rad) {
  * @param {vec3} v Translation vector
  * @returns {mat4} out
  */
-function fromTranslation(out, v) {
+function fromTranslation(v) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = 1;
   out[1] = 0;
   out[2] = 0;
@@ -4562,7 +4780,9 @@ function fromTranslation(out, v) {
  * @param {vec3} v Scaling vector
  * @returns {mat4} out
  */
-function fromScaling(out, v) {
+function fromScaling(v) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = v[0];
   out[1] = 0;
   out[2] = 0;
@@ -4594,7 +4814,9 @@ function fromScaling(out, v) {
  * @param {vec3} axis the axis to rotate around
  * @returns {mat4} out
  */
-function fromRotation(out, rad, axis) {
+function fromRotation(rad, axis) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = axis[0],
       y = axis[1],
       z = axis[2];
@@ -4647,7 +4869,9 @@ function fromRotation(out, rad, axis) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function fromXRotation(out, rad) {
+function fromXRotation(rad) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var s = Math.sin(rad);
   var c = Math.cos(rad);
 
@@ -4682,7 +4906,9 @@ function fromXRotation(out, rad) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function fromYRotation(out, rad) {
+function fromYRotation(rad) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var s = Math.sin(rad);
   var c = Math.cos(rad);
 
@@ -4717,7 +4943,9 @@ function fromYRotation(out, rad) {
  * @param {Number} rad the angle to rotate the matrix by
  * @returns {mat4} out
  */
-function fromZRotation(out, rad) {
+function fromZRotation(rad) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var s = Math.sin(rad);
   var c = Math.cos(rad);
 
@@ -4756,7 +4984,9 @@ function fromZRotation(out, rad) {
  * @param {vec3} v Translation vector
  * @returns {mat4} out
  */
-function fromRotationTranslation(out, q, v) {
+function fromRotationTranslation(q, v) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   // Quaternion math
   var x = q[0],
       y = q[1],
@@ -4805,7 +5035,9 @@ function fromRotationTranslation(out, q, v) {
  * @param  {mat4} mat Matrix to be decomposed (input)
  * @return {vec3} out
  */
-function getTranslation(out, mat) {
+function getTranslation(mat) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = mat[12];
   out[1] = mat[13];
   out[2] = mat[14];
@@ -4823,7 +5055,9 @@ function getTranslation(out, mat) {
  * @param  {mat4} mat Matrix to be decomposed (input)
  * @return {vec3} out
  */
-function getScaling(out, mat) {
+function getScaling(mat) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var m11 = mat[0];
   var m12 = mat[1];
   var m13 = mat[2];
@@ -4850,7 +5084,9 @@ function getScaling(out, mat) {
  * @param {mat4} mat Matrix to be decomposed (input)
  * @return {quat} out
  */
-function getRotation(out, mat) {
+function getRotation(mat) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   // Algorithm taken from http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
   var trace = mat[0] + mat[5] + mat[10];
   var S = 0;
@@ -4901,7 +5137,9 @@ function getRotation(out, mat) {
  * @param {vec3} s Scaling vector
  * @returns {mat4} out
  */
-function fromRotationTranslationScale(out, q, v, s) {
+function fromRotationTranslationScale(q, v, s) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   // Quaternion math
   var x = q[0],
       y = q[1],
@@ -4964,7 +5202,9 @@ function fromRotationTranslationScale(out, q, v, s) {
  * @param {vec3} o The origin vector around which to scale and rotate
  * @returns {mat4} out
  */
-function fromRotationTranslationScaleOrigin(out, q, v, s, o) {
+function fromRotationTranslationScaleOrigin(q, v, s, o) {
+  var out = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : create();
+
   // Quaternion math
   var x = q[0],
       y = q[1],
@@ -5020,7 +5260,9 @@ function fromRotationTranslationScaleOrigin(out, q, v, s, o) {
  *
  * @returns {mat4} out
  */
-function fromQuat(out, q) {
+function fromQuat(q) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var x = q[0],
       y = q[1],
       z = q[2],
@@ -5074,7 +5316,9 @@ function fromQuat(out, q) {
  * @param {Number} far Far bound of the frustum
  * @returns {mat4} out
  */
-function frustum(out, left, right, bottom, top, near, far) {
+function frustum(left, right, bottom, top, near, far) {
+  var out = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : create();
+
   var rl = 1 / (right - left);
   var tb = 1 / (top - bottom);
   var nf = 1 / (near - far);
@@ -5107,7 +5351,9 @@ function frustum(out, left, right, bottom, top, near, far) {
  * @param {number} far Far bound of the frustum
  * @returns {mat4} out
  */
-function perspective(out, fovy, aspect, near, far) {
+function perspective(fovy, aspect, near, far) {
+  var out = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : create();
+
   var f = 1.0 / Math.tan(fovy / 2);
   var nf = 1 / (near - far);
   out[0] = f / aspect;
@@ -5140,7 +5386,9 @@ function perspective(out, fovy, aspect, near, far) {
  * @param {number} far Far bound of the frustum
  * @returns {mat4} out
  */
-function perspectiveFromFieldOfView(out, fov, near, far) {
+function perspectiveFromFieldOfView(fov, near, far) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var upTan = Math.tan(fov.upDegrees * Math.PI / 180.0);
   var downTan = Math.tan(fov.downDegrees * Math.PI / 180.0);
   var leftTan = Math.tan(fov.leftDegrees * Math.PI / 180.0);
@@ -5179,7 +5427,9 @@ function perspectiveFromFieldOfView(out, fov, near, far) {
  * @param {number} far Far bound of the frustum
  * @returns {mat4} out
  */
-function ortho(out, left, right, bottom, top, near, far) {
+function ortho(left, right, bottom, top, near, far) {
+  var out = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : create();
+
   var lr = 1 / (left - right);
   var bt = 1 / (bottom - top);
   var nf = 1 / (near - far);
@@ -5211,7 +5461,9 @@ function ortho(out, left, right, bottom, top, near, far) {
  * @param {vec3} up vec3 pointing up
  * @returns {mat4} out
  */
-function lookAt(out, eye, center, up) {
+function lookAt(eye, center, up) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var x0 = void 0,
       x1 = void 0,
       x2 = void 0,
@@ -5305,7 +5557,9 @@ function lookAt(out, eye, center, up) {
  * @param {vec3} up vec3 pointing up
  * @returns {mat4} out
  */
-function targetTo(out, eye, target, up) {
+function targetTo(eye, target, up) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var eyex = eye[0],
       eyey = eye[1],
       eyez = eye[2],
@@ -5376,7 +5630,9 @@ function frob(a) {
  * @param {mat4} b the second operand
  * @returns {mat4} out
  */
-function add(out, a, b) {
+function add(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   out[2] = a[2] + b[2];
@@ -5404,7 +5660,9 @@ function add(out, a, b) {
  * @param {mat4} b the second operand
  * @returns {mat4} out
  */
-function subtract(out, a, b) {
+function subtract(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   out[2] = a[2] - b[2];
@@ -5432,7 +5690,9 @@ function subtract(out, a, b) {
  * @param {Number} b amount to scale the matrix's elements by
  * @returns {mat4} out
  */
-function multiplyScalar(out, a, b) {
+function multiplyScalar(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   out[2] = a[2] * b;
@@ -5461,7 +5721,9 @@ function multiplyScalar(out, a, b) {
  * @param {Number} scale the amount to scale b's elements by before adding
  * @returns {mat4} out
  */
-function multiplyScalarAndAdd(out, a, b, scale) {
+function multiplyScalarAndAdd(a, b, scale) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   out[0] = a[0] + b[0] * scale;
   out[1] = a[1] + b[1] * scale;
   out[2] = a[2] + b[2] * scale;
@@ -5656,7 +5918,9 @@ function identity(out) {
  * @param {Number} rad the angle in radians
  * @returns {quat} out
  **/
-function setAxisAngle(out, axis, rad) {
+function setAxisAngle(axis, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   rad = rad * 0.5;
   var s = Math.sin(rad);
   out[0] = s * axis[0];
@@ -5703,7 +5967,9 @@ function getAxisAngle(out_axis, q) {
  * @param {quat} b the second operand
  * @returns {quat} out
  */
-function multiply(out, a, b) {
+function multiply(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var ax = a[0],
       ay = a[1],
       az = a[2],
@@ -5728,7 +5994,9 @@ function multiply(out, a, b) {
  * @param {number} rad angle (in radians) to rotate
  * @returns {quat} out
  */
-function rotateX(out, a, rad) {
+function rotateX(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   rad *= 0.5;
 
   var ax = a[0],
@@ -5753,7 +6021,9 @@ function rotateX(out, a, rad) {
  * @param {number} rad angle (in radians) to rotate
  * @returns {quat} out
  */
-function rotateY(out, a, rad) {
+function rotateY(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   rad *= 0.5;
 
   var ax = a[0],
@@ -5778,7 +6048,9 @@ function rotateY(out, a, rad) {
  * @param {number} rad angle (in radians) to rotate
  * @returns {quat} out
  */
-function rotateZ(out, a, rad) {
+function rotateZ(a, rad) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   rad *= 0.5;
 
   var ax = a[0],
@@ -5804,7 +6076,9 @@ function rotateZ(out, a, rad) {
  * @param {quat} a quat to calculate W component of
  * @returns {quat} out
  */
-function calculateW(out, a) {
+function calculateW(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var x = a[0],
       y = a[1],
       z = a[2];
@@ -5825,7 +6099,9 @@ function calculateW(out, a) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {quat} out
  */
-function slerp(out, a, b, t) {
+function slerp(a, b, t) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   // benchmarks:
   //    http://jsperf.com/quaternion-slerp-implementations
   var ax = a[0],
@@ -5882,7 +6158,9 @@ function slerp(out, a, b, t) {
  * @param {quat} a quat to calculate inverse of
  * @returns {quat} out
  */
-function invert(out, a) {
+function invert(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var a0 = a[0],
       a1 = a[1],
       a2 = a[2],
@@ -5907,7 +6185,9 @@ function invert(out, a) {
  * @param {quat} a quat to calculate conjugate of
  * @returns {quat} out
  */
-function conjugate(out, a) {
+function conjugate(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = -a[0];
   out[1] = -a[1];
   out[2] = -a[2];
@@ -5926,7 +6206,9 @@ function conjugate(out, a) {
  * @returns {quat} out
  * @function
  */
-function fromMat3(out, m) {
+function fromMat3(m) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   // Algorithm in Ken Shoemake's article in 1987 SIGGRAPH course notes
   // article "Quaternion Calculus and Fast Animation".
   var fTrace = m[0] + m[4] + m[8];
@@ -5969,7 +6251,9 @@ function fromMat3(out, m) {
  * @returns {quat} out
  * @function
  */
-function fromEuler(out, x, y, z) {
+function fromEuler(x, y, z) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var halfToRad = 0.5 * Math.PI / 180.0;
   x *= halfToRad;
   y *= halfToRad;
@@ -6167,13 +6451,15 @@ var rotationTo = exports.rotationTo = function () {
   var xUnitVec3 = vec3.fromValues(1, 0, 0);
   var yUnitVec3 = vec3.fromValues(0, 1, 0);
 
-  return function (out, a, b) {
+  return function (a, b) {
+    var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
     var dot = vec3.dot(a, b);
     if (dot < -0.999999) {
       vec3.cross(tmpvec3, xUnitVec3, a);
       if (vec3.len(tmpvec3) < 0.000001) vec3.cross(tmpvec3, yUnitVec3, a);
       vec3.normalize(tmpvec3, tmpvec3);
-      setAxisAngle(out, tmpvec3, Math.PI);
+      setAxisAngle(tmpvec3, Math.PI, out = create());
       return out;
     } else if (dot > 0.999999) {
       out[0] = 0;
@@ -6187,7 +6473,7 @@ var rotationTo = exports.rotationTo = function () {
       out[1] = tmpvec3[1];
       out[2] = tmpvec3[2];
       out[3] = 1 + dot;
-      return normalize(out, out);
+      return normalize(out, out = create());
     }
   };
 }();
@@ -6207,10 +6493,12 @@ var sqlerp = exports.sqlerp = function () {
   var temp1 = create();
   var temp2 = create();
 
-  return function (out, a, b, c, d, t) {
+  return function (a, b, c, d, t) {
+    var out = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : create();
+
     slerp(temp1, a, d, t);
     slerp(temp2, b, c, t);
-    slerp(out, temp1, temp2, 2 * t * (1 - t));
+    slerp(temp1, temp2, 2 * t * (1 - t, out = create()));
 
     return out;
   };
@@ -6229,7 +6517,9 @@ var sqlerp = exports.sqlerp = function () {
 var setAxes = exports.setAxes = function () {
   var matr = mat3.create();
 
-  return function (out, view, right, up) {
+  return function (view, right, up) {
+    var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
     matr[0] = right[0];
     matr[3] = right[1];
     matr[6] = right[2];
@@ -6242,7 +6532,7 @@ var setAxes = exports.setAxes = function () {
     matr[5] = -view[1];
     matr[8] = -view[2];
 
-    return normalize(out, fromMat3(out, matr));
+    return normalize(fromMat3(out, matr, out = create()));
   };
 }();
 
@@ -6369,7 +6659,9 @@ function fromValues(x, y) {
  * @param {vec2} a the source vector
  * @returns {vec2} out
  */
-function copy(out, a) {
+function copy(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = a[0];
   out[1] = a[1];
   return out;
@@ -6383,7 +6675,9 @@ function copy(out, a) {
  * @param {Number} y Y component
  * @returns {vec2} out
  */
-function set(out, x, y) {
+function set(x, y) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = x;
   out[1] = y;
   return out;
@@ -6397,7 +6691,9 @@ function set(out, x, y) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-function add(out, a, b) {
+function add(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] + b[0];
   out[1] = a[1] + b[1];
   return out;
@@ -6411,7 +6707,9 @@ function add(out, a, b) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-function subtract(out, a, b) {
+function subtract(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] - b[0];
   out[1] = a[1] - b[1];
   return out;
@@ -6425,7 +6723,9 @@ function subtract(out, a, b) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-function multiply(out, a, b) {
+function multiply(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b[0];
   out[1] = a[1] * b[1];
   return out;
@@ -6439,7 +6739,9 @@ function multiply(out, a, b) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-function divide(out, a, b) {
+function divide(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] / b[0];
   out[1] = a[1] / b[1];
   return out;
@@ -6452,7 +6754,9 @@ function divide(out, a, b) {
  * @param {vec2} a vector to ceil
  * @returns {vec2} out
  */
-function ceil(out, a) {
+function ceil(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.ceil(a[0]);
   out[1] = Math.ceil(a[1]);
   return out;
@@ -6465,7 +6769,9 @@ function ceil(out, a) {
  * @param {vec2} a vector to floor
  * @returns {vec2} out
  */
-function floor(out, a) {
+function floor(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.floor(a[0]);
   out[1] = Math.floor(a[1]);
   return out;
@@ -6479,7 +6785,9 @@ function floor(out, a) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-function min(out, a, b) {
+function min(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = Math.min(a[0], b[0]);
   out[1] = Math.min(a[1], b[1]);
   return out;
@@ -6493,7 +6801,9 @@ function min(out, a, b) {
  * @param {vec2} b the second operand
  * @returns {vec2} out
  */
-function max(out, a, b) {
+function max(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = Math.max(a[0], b[0]);
   out[1] = Math.max(a[1], b[1]);
   return out;
@@ -6506,7 +6816,9 @@ function max(out, a, b) {
  * @param {vec2} a vector to round
  * @returns {vec2} out
  */
-function round(out, a) {
+function round(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = Math.round(a[0]);
   out[1] = Math.round(a[1]);
   return out;
@@ -6520,7 +6832,9 @@ function round(out, a) {
  * @param {Number} b amount to scale the vector by
  * @returns {vec2} out
  */
-function scale(out, a, b) {
+function scale(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   out[0] = a[0] * b;
   out[1] = a[1] * b;
   return out;
@@ -6535,7 +6849,9 @@ function scale(out, a, b) {
  * @param {Number} scale the amount to scale b by before adding
  * @returns {vec2} out
  */
-function scaleAndAdd(out, a, b, scale) {
+function scaleAndAdd(a, b, scale) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   out[0] = a[0] + b[0] * scale;
   out[1] = a[1] + b[1] * scale;
   return out;
@@ -6598,7 +6914,9 @@ function squaredLength(a) {
  * @param {vec2} a vector to negate
  * @returns {vec2} out
  */
-function negate(out, a) {
+function negate(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = -a[0];
   out[1] = -a[1];
   return out;
@@ -6611,7 +6929,9 @@ function negate(out, a) {
  * @param {vec2} a vector to invert
  * @returns {vec2} out
  */
-function inverse(out, a) {
+function inverse(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   out[0] = 1.0 / a[0];
   out[1] = 1.0 / a[1];
   return out;
@@ -6624,7 +6944,9 @@ function inverse(out, a) {
  * @param {vec2} a vector to normalize
  * @returns {vec2} out
  */
-function normalize(out, a) {
+function normalize(a) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   var x = a[0],
       y = a[1];
   var len = x * x + y * y;
@@ -6657,7 +6979,9 @@ function dot(a, b) {
  * @param {vec2} b the second operand
  * @returns {vec3} out
  */
-function cross(out, a, b) {
+function cross(a, b) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var z = a[0] * b[1] - a[1] * b[0];
   out[0] = out[1] = 0;
   out[2] = z;
@@ -6673,7 +6997,9 @@ function cross(out, a, b) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {vec2} out
  */
-function lerp(out, a, b, t) {
+function lerp(a, b, t) {
+  var out = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : create();
+
   var ax = a[0],
       ay = a[1];
   out[0] = ax + t * (b[0] - ax);
@@ -6688,7 +7014,9 @@ function lerp(out, a, b, t) {
  * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned
  * @returns {vec2} out
  */
-function random(out, scale) {
+function random(scale) {
+  var out = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : create();
+
   scale = scale || 1.0;
   var r = glMatrix.RANDOM() * 2.0 * Math.PI;
   out[0] = Math.cos(r) * scale;
@@ -6704,7 +7032,9 @@ function random(out, scale) {
  * @param {mat2} m matrix to transform with
  * @returns {vec2} out
  */
-function transformMat2(out, a, m) {
+function transformMat2(a, m) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = a[0],
       y = a[1];
   out[0] = m[0] * x + m[2] * y;
@@ -6720,7 +7050,9 @@ function transformMat2(out, a, m) {
  * @param {mat2d} m matrix to transform with
  * @returns {vec2} out
  */
-function transformMat2d(out, a, m) {
+function transformMat2d(a, m) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = a[0],
       y = a[1];
   out[0] = m[0] * x + m[2] * y + m[4];
@@ -6737,7 +7069,9 @@ function transformMat2d(out, a, m) {
  * @param {mat3} m matrix to transform with
  * @returns {vec2} out
  */
-function transformMat3(out, a, m) {
+function transformMat3(a, m) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = a[0],
       y = a[1];
   out[0] = m[0] * x + m[3] * y + m[6];
@@ -6755,7 +7089,9 @@ function transformMat3(out, a, m) {
  * @param {mat4} m matrix to transform with
  * @returns {vec2} out
  */
-function transformMat4(out, a, m) {
+function transformMat4(a, m) {
+  var out = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : create();
+
   var x = a[0];
   var y = a[1];
   out[0] = m[0] * x + m[4] * y + m[12];

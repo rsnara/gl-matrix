@@ -65,7 +65,7 @@ export function identity(out) {
  * @param {Number} rad the angle in radians
  * @returns {quat} out
  **/
-export function setAxisAngle(out, axis, rad) {
+export function setAxisAngle(axis, rad, out = create()) {
   rad = rad * 0.5;
   let s = Math.sin(rad);
   out[0] = s * axis[0];
@@ -112,7 +112,7 @@ export function getAxisAngle(out_axis, q) {
  * @param {quat} b the second operand
  * @returns {quat} out
  */
-export function multiply(out, a, b) {
+export function multiply(a, b, out = create()) {
   let ax = a[0], ay = a[1], az = a[2], aw = a[3];
   let bx = b[0], by = b[1], bz = b[2], bw = b[3];
 
@@ -131,7 +131,7 @@ export function multiply(out, a, b) {
  * @param {number} rad angle (in radians) to rotate
  * @returns {quat} out
  */
-export function rotateX(out, a, rad) {
+export function rotateX(a, rad, out = create()) {
   rad *= 0.5;
 
   let ax = a[0], ay = a[1], az = a[2], aw = a[3];
@@ -152,7 +152,7 @@ export function rotateX(out, a, rad) {
  * @param {number} rad angle (in radians) to rotate
  * @returns {quat} out
  */
-export function rotateY(out, a, rad) {
+export function rotateY(a, rad, out = create()) {
   rad *= 0.5;
 
   let ax = a[0], ay = a[1], az = a[2], aw = a[3];
@@ -173,7 +173,7 @@ export function rotateY(out, a, rad) {
  * @param {number} rad angle (in radians) to rotate
  * @returns {quat} out
  */
-export function rotateZ(out, a, rad) {
+export function rotateZ(a, rad, out = create()) {
   rad *= 0.5;
 
   let ax = a[0], ay = a[1], az = a[2], aw = a[3];
@@ -195,7 +195,7 @@ export function rotateZ(out, a, rad) {
  * @param {quat} a quat to calculate W component of
  * @returns {quat} out
  */
-export function calculateW(out, a) {
+export function calculateW(a, out = create()) {
   let x = a[0], y = a[1], z = a[2];
 
   out[0] = x;
@@ -214,7 +214,7 @@ export function calculateW(out, a) {
  * @param {Number} t interpolation amount between the two inputs
  * @returns {quat} out
  */
-export function slerp(out, a, b, t) {
+export function slerp(a, b, t, out = create()) {
   // benchmarks:
   //    http://jsperf.com/quaternion-slerp-implementations
   let ax = a[0], ay = a[1], az = a[2], aw = a[3];
@@ -261,7 +261,7 @@ export function slerp(out, a, b, t) {
  * @param {quat} a quat to calculate inverse of
  * @returns {quat} out
  */
-export function invert(out, a) {
+export function invert(a, out = create()) {
   let a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
   let dot = a0*a0 + a1*a1 + a2*a2 + a3*a3;
   let invDot = dot ? 1.0/dot : 0;
@@ -283,7 +283,7 @@ export function invert(out, a) {
  * @param {quat} a quat to calculate conjugate of
  * @returns {quat} out
  */
-export function conjugate(out, a) {
+export function conjugate(a, out = create()) {
   out[0] = -a[0];
   out[1] = -a[1];
   out[2] = -a[2];
@@ -302,7 +302,7 @@ export function conjugate(out, a) {
  * @returns {quat} out
  * @function
  */
-export function fromMat3(out, m) {
+export function fromMat3(m, out = create()) {
   // Algorithm in Ken Shoemake's article in 1987 SIGGRAPH course notes
   // article "Quaternion Calculus and Fast Animation".
   let fTrace = m[0] + m[4] + m[8];
@@ -347,7 +347,7 @@ export function fromMat3(out, m) {
  * @returns {quat} out
  * @function
  */
-export function fromEuler(out, x, y, z) {
+export function fromEuler(x, y, z, out = create()) {
     let halfToRad = 0.5 * Math.PI / 180.0;
     x *= halfToRad;
     y *= halfToRad;
@@ -545,14 +545,14 @@ export const rotationTo = (function() {
   let xUnitVec3 = vec3.fromValues(1,0,0);
   let yUnitVec3 = vec3.fromValues(0,1,0);
 
-  return function(out, a, b) {
+  return function(a, b, out = create()) {
     let dot = vec3.dot(a, b);
     if (dot < -0.999999) {
       vec3.cross(tmpvec3, xUnitVec3, a);
       if (vec3.len(tmpvec3) < 0.000001)
         vec3.cross(tmpvec3, yUnitVec3, a);
       vec3.normalize(tmpvec3, tmpvec3);
-      setAxisAngle(out, tmpvec3, Math.PI);
+      setAxisAngle(tmpvec3, Math.PI, out = create());
       return out;
     } else if (dot > 0.999999) {
       out[0] = 0;
@@ -566,7 +566,7 @@ export const rotationTo = (function() {
       out[1] = tmpvec3[1];
       out[2] = tmpvec3[2];
       out[3] = 1 + dot;
-      return normalize(out, out);
+      return normalize(out, out = create());
     }
   };
 })();
@@ -586,10 +586,10 @@ export const sqlerp = (function () {
   let temp1 = create();
   let temp2 = create();
 
-  return function (out, a, b, c, d, t) {
+  return function (a, b, c, d, t, out = create()) {
     slerp(temp1, a, d, t);
     slerp(temp2, b, c, t);
-    slerp(out, temp1, temp2, 2 * t * (1 - t));
+    slerp(temp1, temp2, 2 * t * (1 - t, out = create()));
 
     return out;
   };
@@ -608,7 +608,7 @@ export const sqlerp = (function () {
 export const setAxes = (function() {
   let matr = mat3.create();
 
-  return function(out, view, right, up) {
+  return function(view, right, up, out = create()) {
     matr[0] = right[0];
     matr[3] = right[1];
     matr[6] = right[2];
@@ -621,6 +621,6 @@ export const setAxes = (function() {
     matr[5] = -view[1];
     matr[8] = -view[2];
 
-    return normalize(out, fromMat3(out, matr));
+    return normalize(fromMat3(out, matr, out = create()));
   };
 })();
